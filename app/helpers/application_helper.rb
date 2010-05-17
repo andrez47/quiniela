@@ -1,9 +1,8 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  # Return a title on a per-page basis.
   def title
-    base_title = "Wolrd Cup Predictor"
+    base_title = "World Cup Predictor"
     if @title.nil?
       base_title
     else
@@ -12,6 +11,6 @@ module ApplicationHelper
   end
 
   def logo
-    image_tag("logo.jpg", :alt => "Sample App", :class => "round")
+    image_tag("logo.jpg", :alt => "World Cup Predictor", :class => "round")
   end
 end
