@@ -1,0 +1,26 @@
+<div id="title">
+  <h1>World Cup Predictor</h1>
+</div>
+
+<table>
+  <tr>
+    <td width="50%">
+      <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+    </td>
+    <td width="50%">
+      <% form_for(:session, :url => signin_path) do |f| %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.text_field :email %>
+        </div>
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Sign in" %>
+        </div>
+      <% end %>
+    </td>
+  </tr>
+</table>

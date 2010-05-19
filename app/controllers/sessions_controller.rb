@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
-  def new
-    @title = "Sign in"
+  def index
+    @title = "Index"
   end
 
   def create
@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
                              params[:session][:password])
     if user.nil?
       flash.now[:error] = "Invalid email/password combination."
-      @title = "Sign in"
-      render 'new'
+      @title = "Index"
+      render 'index'
     else
       sign_in user
-      redirect_back_or user
+      redirect_to home_path
     end
   end
 

@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #cff;
+  background: #369;
 }
 
 #header {
@@ -20,6 +20,10 @@ body {
   font-size: 120%;
   padding: 20px;
   background: #fff;
+}
+
+#title {
+  text-align: center;
 }
 
 /* Links */
@@ -182,4 +186,3 @@ ul.users {
 .users li {
   list-style: none;
 }
-
