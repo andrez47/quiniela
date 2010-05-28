@@ -40,19 +40,20 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing or commenting them out if you're using named routes and resources.
 
   # session pages
-  map.root                :controller => 'sessions', :action => 'index'
-  map.signin  '/signin',  :controller => 'sessions', :action => 'create'
-  map.signout '/signout', :controller => 'sessions', :action => 'destroy'
+  map.root                 :controller => 'sessions', :action => 'index'
+  map.login     '/login',  :controller => 'sessions', :action => 'create'
+  map.logout    '/logout', :controller => 'sessions', :action => 'destroy'
 
   # static pages
-  map.contact '/contact', :controller => 'pages', :action => 'contact'
-  map.about   '/about',   :controller => 'pages', :action => 'about'
-  map.help    '/help',    :controller => 'pages', :action => 'help'
+  map.contact   '/contact', :controller => 'pages', :action => 'contact'
+  map.about     '/about',   :controller => 'pages', :action => 'about'
+  map.help      '/help',    :controller => 'pages', :action => 'help'
+  map.terms     '/terms',   :controller => 'pages', :action => 'terms'
 
   # user pages
+  map.home      '/home',     :controller => 'users', :action => 'home'
+  map.register  '/register', :controller => 'users', :action => 'new'
   map.resources :users
-  map.signup   '/signup',   :controller => 'users', :action => 'new'
-  map.home     '/home',     :controller => 'users', :action => 'home'
 
   #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'

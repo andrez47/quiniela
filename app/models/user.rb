@@ -1,71 +1,57 @@
 # == Schema Information
-# Schema version: 20100515011127
+# Schema version: 20100525070714
 #
 # Table name: users
 #
-#  id                 :integer(4)      not null, primary key
-#  name               :string(255)
-#  email              :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  encrypted_password :string(255)
-#  salt               :string(255)
-#  remember_token     :string(255)
-#  admin              :boolean(1)
+#  id                        :integer(4)      not null, primary key
+#  name                      :string(255)
+#  email                     :string(255)
+#  crypted_password          :string(255)
+#  salt                      :string(255)
+#  user_type                 :integer(4)
+#  country                   :string(255)
+#  remember_token            :string(255)
+#  remember_token_expires_at :datetime
+#  created_at                :datetime
+#  updated_at                :datetime
 #
 
-require 'digest'
+require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation
+  include Authentication
+  include Authentication::ByPassword
+  include Authentication::ByCookieToken
 
-  EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+  validates_length_of       :name,     :within => 6..100
+  validates_presence_of     :email
+  validates_length_of       :email,    :within => 6..100 #r@a.wk
+  validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
+  validates_uniqueness_of   :email
+  validates_presence_of     :country
+  #validates_inclusion_of    :user_type, :in => 0..1
+  validates_acceptance_of   :terms_of_service
 
-  validates_presence_of   :name, :email
-  validates_length_of     :name, :maximum => 50
-  validates_format_of     :email, :with => EmailRegex
-  validates_uniqueness_of :email, :case_sensitive => false
-  validates_confirmation_of :password
-  validates_presence_of     :password
-  validates_length_of       :password, :within => 6..40
+  # HACK HACK HACK -- how to do attr_accessible from here?
+  # prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :email, :name, :password, :password_confirmation, :country, :user_type, :terms_of_service
 
-  before_save :encrypt_password
-
-  def has_password?(submitted_password)
-    encrypted_password == encrypt(submitted_password)
+  # Authenticates a user by their login name and unencrypted password.
+  # Returns the user or nil.
+  # uff.  this is really an authorization, not authentication routine.
+  # We really need a Dispatch Chain here or something.
+  # This will also let us return a human error message.
+  #
+  def self.authenticate(email, password)
+    return nil if email.blank? || password.blank?
+    u = find_by_email(email.downcase) # need to get the salt
+    u && u.authenticated?(password) ? u : nil
   end
 
-  def remember_me!
-    self.remember_token = encrypt("#{salt}--#{id}")
-    save_without_validation
-  end
-
-  def self.authenticate(email, submitted_password)
-    user = find_by_email(email)
-    return nil  if user.nil?
-    return user if user.has_password?(submitted_password)
-  end
-
-private
-
-  def encrypt_password
-    unless password.nil?
-      self.salt = make_salt
-      self.encrypted_password = encrypt(password)
-    end
-  end
-
-  def encrypt(string)
-    secure_hash("#{salt}#{string}")
-  end
-
-  def make_salt
-    secure_hash("#{Time.now.utc}#{password}")
-  end
-
-  def secure_hash(string)
-    Digest::SHA2.hexdigest(string)
+  def email=(value)
+    write_attribute :email, (value ? value.downcase : nil)
   end
 
 end

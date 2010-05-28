@@ -5,20 +5,24 @@
 <table>
   <tr>
     <td width="50%">
-      <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+      <%= link_to "Register now!", register_path, :class => "signup_button round" %>
     </td>
     <td width="50%">
-      <% form_for(:session, :url => signin_path) do |f| %>
+      <% form_tag login_path do -%>
         <div class="field">
-          <%= f.label :email %><br />
-          <%= f.text_field :email %>
+          <%= label_tag 'email' %><br />
+          <%= text_field_tag 'email', @email %>
         </div>
         <div class="field">
-          <%= f.label :password %><br />
-          <%= f.password_field :password %>
+          <%= label_tag 'password' %><br />
+          <%= password_field_tag 'password', nil %>
+        </div>
+        <div class="field">
+          <%= check_box_tag 'remember_me', '1', @remember_me %>
+          <%= label_tag 'remember_me', 'Remember me' %>
         </div>
         <div class="actions">
-          <%= f.submit "Sign in" %>
+          <%= submit_tag 'Login' %>
         </div>
       <% end %>
     </td>

@@ -12,4 +12,8 @@ class PagesController < ApplicationController
     @title = "Help"
   end
 
+  def terms
+    @title = "Terms of Use"
+    render :layout => false
+  end
 end

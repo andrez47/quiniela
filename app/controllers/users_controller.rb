@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:home, :index, :edit, :show, :update, :destroy]
-  before_filter :correct_user, :only => [:edit, :update]
-  before_filter :admin_user,   :only => :destroy
+  before_filter :login_required, :only => [:home, :show, :edit, :update]
+  before_filter :admin_required, :only => [:index, :destroy]
 
   def index
     @title = "All users"
@@ -10,18 +9,48 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @title = "Sign up"
   end
 
   def create
+    logout_keeping_session!
     @user = User.new(params[:user])
-    if @user.save
-      sign_in @user
-      flash[:success] = "Welcome!"
+    success = @user && @user.save
+    if success && @user.errors.empty?
+      # Protects against session fixation attacks, causes request forgery
+      # protection if visitor resubmits an earlier form using back
+      # button. Uncomment if you understand the tradeoffs.
+      # reset session
+      self.current_user = @user # !! now logged in
+      redirect_to home_path
+      flash[:notice] = "Welcome"
+    else
+      render :action => 'new'
+    end
+  end
+
+  def edit
+    paramId = params[:id]
+    if !is_admin? && paramId.to_i != self.current_user.id.to_i
       redirect_to home_path
     else
-      @title = "Sign up"
-      render 'new'
+      @user = User.find(params[:id])
+    end
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update_attributes(params[:user])
+      if is_admin?
+        redirect_to users_path
+        flash[:notice] = 'User was successfully updated.'
+      else
+        redirect_to home_path
+        flash[:notice] = 'Your information was successfully updated.'
+      end
+    else
+      flash.now[:error] = "User edition failed!"
+      render :action => "edit"
     end
   end
 
@@ -30,18 +59,8 @@ class UsersController < ApplicationController
     @title = @user.name
   end
 
-  def edit
-    @title = "Edit user"
-  end
-
-  def update
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Profile updated."
-      redirect_to @user
-    else
-      @title = "Edit user"
-      render 'edit'
-    end
+  def home
+    @user = current_user
   end
 
   def destroy
@@ -49,24 +68,4 @@ class UsersController < ApplicationController
     flash[:success] = "User destroyed."
     redirect_to users_path
   end
-
-  def home
-    @title = "Home"
-  end
-
-private
-
-  def authenticate
-    deny_access unless signed_in?
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(home_path) unless current_user?(@user)
-  end
-
-  def admin_user
-    redirect_to(root_path) unless current_user.admin?
-  end
-
 end
