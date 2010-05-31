@@ -21,10 +21,8 @@
 <p><%= label_tag 'country' %><br/>
 <%= localized_country_select(:user, :country, [], :include_blank => 'Please choose...') %>
 
-<p>
-  <label for="user_type">User Type:</label><br/>
-  <%= select( "user", "user_type", { "Unprivileged" => 0, "Privileged" => 1}) %>
-</p>
+<p><%= label_tag 'Favorite team:' %><br/>
+<%= collection_select(:user, :team_id, @teams, :code, :name, options ={:prompt => "-Select a Favorite Team"}) %></p>
 
 <%= check_box :user, :terms_of_service %>
 <%= link_to "Terms Of Use", terms_path, :popup => ['new_window_name', 'height=300,width=600'] %>

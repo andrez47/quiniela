@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    @teams = Team.find(:all, :order=>"name")
     @user = User.new
   end
 
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
       redirect_to home_path
       flash[:notice] = "Welcome"
     else
+      @teams = Team.find(:all, :order=>"name")
       render :action => 'new'
     end
   end

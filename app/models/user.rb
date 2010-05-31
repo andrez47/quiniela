@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100525070714
+# Schema version: 20100530232622
 #
 # Table name: users
 #
@@ -8,7 +8,7 @@
 #  email                     :string(255)
 #  crypted_password          :string(255)
 #  salt                      :string(255)
-#  user_type                 :integer(4)
+#  user_type                 :integer(4)      default(0)
 #  country                   :string(255)
 #  remember_token            :string(255)
 #  remember_token_expires_at :datetime
@@ -19,6 +19,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  has_one :team
+
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
@@ -30,13 +32,14 @@ class User < ActiveRecord::Base
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
   validates_uniqueness_of   :email
   validates_presence_of     :country
+  validates_presence_of     :team_id
   #validates_inclusion_of    :user_type, :in => 0..1
   validates_acceptance_of   :terms_of_service
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :name, :password, :password_confirmation, :country, :user_type, :terms_of_service
+  attr_accessible :email, :name, :password, :password_confirmation, :country, :user_type, :terms_of_service, :team_id
 
   # Authenticates a user by their login name and unencrypted password.
   # Returns the user or nil.
