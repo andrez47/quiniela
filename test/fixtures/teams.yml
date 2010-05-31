@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100530232622
+# Schema version: 20100531002439
 #
 # Table name: teams
 #
