@@ -13,4 +13,8 @@ module ApplicationHelper
   def logo
     image_tag("logo.jpg", :alt => "World Cup Predictor", :class => "round")
   end
+
+  def flag(team, teamName)
+    image_tag("flags/#{team}.png", :alt => teamName)
+  end
 end

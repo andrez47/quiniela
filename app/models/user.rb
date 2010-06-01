@@ -20,7 +20,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_one :team
+  belongs_to :team
+  has_many :predictions
 
   include Authentication
   include Authentication::ByPassword

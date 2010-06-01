@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  team_code1: MyString
+  team_code2: MyString
+  team_score1: 1
+  team_score2: 1
+  phase: MyString
+  number: 1
+  winner: MyString
+  date: 2010-05-30 20:21:59
+  update_date: 2010-05-30 20:21:59
+
+two:
+  team_code1: MyString
+  team_code2: MyString
+  team_score1: 1
+  team_score2: 1
+  phase: MyString
+  number: 1
+  winner: MyString
+  date: 2010-05-30 20:21:59
+  update_date: 2010-05-30 20:21:59

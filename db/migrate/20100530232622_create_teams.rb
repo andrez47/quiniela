@@ -5,8 +5,6 @@ class CreateTeams < ActiveRecord::Migration
       t.string  :code
       t.string  :group_name
       t.integer :group_position
-
-      t.timestamps
     end
 
   end

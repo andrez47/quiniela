@@ -3,4 +3,14 @@
 <h2>
   <%= h @user.name %>
   <%= gravatar_for @user %>
+  Favorite Team:
+  <%= h @user.team.name %>
 </h2>
+
+<% for game in @games %>
+  <%= flag(game.team1.code, game.team1.name) %>
+  <%= h(game.team1.name) %>
+  <%= flag(game.team2.code, game.team2.name) %>
+  <%= h(game.team2.name) %>
+  <br>
+<% end %>

@@ -63,6 +63,7 @@ class UsersController < ApplicationController
 
   def home
     @user = current_user
+    @games = Game.find(:all)
   end
 
   def destroy
