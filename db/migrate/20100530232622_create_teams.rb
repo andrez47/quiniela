@@ -3,7 +3,7 @@ class CreateTeams < ActiveRecord::Migration
     create_table :teams do |t|
       t.string  :name
       t.string  :code
-      t.string  :group_name
+      t.string  :group
       t.integer :group_position
     end
 

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100531002439
+# Schema version: 20100601050502
 #
 # Table name: teams
 #
@@ -8,8 +8,6 @@
 #  code           :string(255)
 #  group_name     :string(255)
 #  group_position :integer(4)
-#  created_at     :datetime
-#  updated_at     :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

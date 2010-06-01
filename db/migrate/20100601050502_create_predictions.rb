@@ -8,10 +8,10 @@ class CreatePredictions < ActiveRecord::Migration
       t.string  :winner
       t.integer :points
     end
-  end
 
-  #add_index :predictions, :user_id
-  #add_index :predictions, :game_id
+    add_index :predictions, :user_id
+    add_index :predictions, :game_id
+  end
 
   def self.down
     drop_table :predictions

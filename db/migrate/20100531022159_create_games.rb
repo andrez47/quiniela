@@ -11,6 +11,9 @@ class CreateGames < ActiveRecord::Migration
       t.date     :date
       t.datetime :update_date
     end
+
+    add_index :games, :team1_id
+    add_index :games, :team2_id
   end
 
   def self.down

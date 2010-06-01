@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(:version => 20100601050502) do
     t.datetime "update_date"
   end
 
+  add_index "games", ["team1_id"], :name => "index_games_on_team1_id"
+  add_index "games", ["team2_id"], :name => "index_games_on_team2_id"
+
   create_table "predictions", :force => true do |t|
     t.integer "user_id"
     t.integer "game_id"
@@ -32,10 +35,13 @@ ActiveRecord::Schema.define(:version => 20100601050502) do
     t.integer "points"
   end
 
+  add_index "predictions", ["game_id"], :name => "index_predictions_on_game_id"
+  add_index "predictions", ["user_id"], :name => "index_predictions_on_user_id"
+
   create_table "teams", :force => true do |t|
     t.string  "name"
     t.string  "code"
-    t.string  "group_name"
+    t.string  "group"
     t.integer "group_position"
   end
 
@@ -46,13 +52,14 @@ ActiveRecord::Schema.define(:version => 20100601050502) do
     t.string   "salt"
     t.integer  "user_type",                 :default => 0
     t.string   "country"
+    t.integer  "team_id"
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["team_id"], :name => "index_users_on_team_id"
 
 end

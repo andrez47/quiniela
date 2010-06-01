@@ -7,12 +7,14 @@ class CreateUsers < ActiveRecord::Migration
       t.string   :salt
       t.integer  :user_type, :default => 0
       t.string   :country
+      t.integer  :team_id
       t.string   :remember_token
       t.datetime :remember_token_expires_at
       t.timestamps
     end
 
     add_index :users, :email, :unique => true
+    add_index :users, :team_id
   end
 
   def self.down

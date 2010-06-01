@@ -8,9 +8,13 @@
 </h2>
 
 <% for game in @games %>
+  <% if game.team1.group == "A" %>
   <%= flag(game.team1.code, game.team1.name) %>
   <%= h(game.team1.name) %>
   <%= flag(game.team2.code, game.team2.name) %>
   <%= h(game.team2.name) %>
+  <%= h(game.date) %>
+  <br>
+  <% end %>
   <br>
 <% end %>
