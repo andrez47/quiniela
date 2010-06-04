@@ -186,3 +186,10 @@ ul.users {
 .users li {
   list-style: none;
 }
+
+table.games {
+  background-color : #EEE;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}

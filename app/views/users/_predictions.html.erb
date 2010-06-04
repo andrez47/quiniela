@@ -1,0 +1,18 @@
+
+<h3>Group <%= predictions[0].game.phase %></h3>
+<table class="box round">
+  <% for prediction in predictions %>
+  <tr>
+    <td width="10"><%= prediction.game.number %></td>
+    <td width="100"><%= prediction.game.date.strftime("%d/%m %H:%M") %></td>
+    <td width="10"><%= flag(prediction.game.team1.code, prediction.game.team1.name) %></td>
+    <td width="100"><%= h(prediction.game.team1.name) %></td>
+    <td width="100"><%= h(prediction.score1) %></td>
+    <td width="10">vs</td>
+    <td width="100"><%= h(prediction.score2) %></td>
+    <td width="100"><%= h(prediction.game.team2.name) %></td>
+    <td width="10"><%= flag(prediction.game.team2.code, prediction.game.team2.name) %></td>
+    <td width="100"><%= h(prediction.points) %></td>
+  </tr>
+  <% end %>
+</table>

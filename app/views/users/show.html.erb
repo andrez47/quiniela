@@ -1,4 +1,6 @@
 <h2>Public users page</h2>
 
 <%= gravatar_for @user %>
-<%= h @user.name %>
+<%= h @user.name %> <br><br>
+
+<%= render :partial => 'predictions', :collection => @predictions %>

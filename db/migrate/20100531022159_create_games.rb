@@ -8,7 +8,7 @@ class CreateGames < ActiveRecord::Migration
       t.string   :phase
       t.integer  :number
       t.string   :winner
-      t.date     :date
+      t.datetime :date
       t.datetime :update_date
     end
 

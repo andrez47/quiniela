@@ -10,11 +10,11 @@
 #  salt                      :string(255)
 #  user_type                 :integer(4)      default(0)
 #  country                   :string(255)
+#  team_id                   :integer(4)
 #  remember_token            :string(255)
 #  remember_token_expires_at :datetime
 #  created_at                :datetime
 #  updated_at                :datetime
-#  team_id                   :integer(4)
 #
 
 require 'digest/sha1'
@@ -59,4 +59,43 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
+  def create_predictions_set
+    games = Game.find(:all)
+
+    for game in games
+      prediction = Prediction.new()
+      prediction.user_id = self.id
+      prediction.game_id = game.id
+      prediction.save()
+    end
+  end
+
+  def get_predictions
+    predictions = [
+      Prediction.find(:all,
+        :conditions => ["user_id = ? and g.phase = 'A'", self.id],
+        :joins => "inner join games as g on game_id = g.id"),
+      Prediction.find(:all,
+        :conditions => ["user_id = ? and g.phase = 'B'", self.id],
+        :joins => "inner join games as g on game_id = g.id"),
+      Prediction.find(:all,
+        :conditions => ["user_id = ? and g.phase = 'C'", self.id],
+        :joins => "inner join games as g on game_id = g.id"),
+      Prediction.find(:all,
+        :conditions => ["user_id = ? and g.phase = 'D'", self.id],
+        :joins => "inner join games as g on game_id = g.id"),
+      Prediction.find(:all,
+        :conditions => ["user_id = ? and g.phase = 'E'", self.id],
+        :joins => "inner join games as g on game_id = g.id"),
+      Prediction.find(:all,
+        :conditions => ["user_id = ? and g.phase = 'F'", self.id],
+        :joins => "inner join games as g on game_id = g.id"),
+      Prediction.find(:all,
+        :conditions => ["user_id = ? and g.phase = 'G'", self.id],
+        :joins => "inner join games as g on game_id = g.id"),
+      Prediction.find(:all,
+        :conditions => ["user_id = ? and g.phase = 'H'", self.id],
+        :joins => "inner join games as g on game_id = g.id")
+    ]
+  end
 end

@@ -10,11 +10,11 @@
 #  salt                      :string(255)
 #  user_type                 :integer(4)      default(0)
 #  country                   :string(255)
+#  team_id                   :integer(4)
 #  remember_token            :string(255)
 #  remember_token_expires_at :datetime
 #  created_at                :datetime
 #  updated_at                :datetime
-#  team_id                   :integer(4)
 #
 
 

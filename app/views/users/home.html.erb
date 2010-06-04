@@ -1,20 +1,5 @@
-<h1>Private Home</h1>
+<h1><%= t "home.title" %></h1>
 
-<h2>
-  <%= h @user.name %>
-  <%= gravatar_for @user %>
-  Favorite Team:
-  <%= h @user.team.name %>
-</h2>
-
-<% for game in @games %>
-  <% if game.team1.group == "A" %>
-  <%= flag(game.team1.code, game.team1.name) %>
-  <%= h(game.team1.name) %>
-  <%= flag(game.team2.code, game.team2.name) %>
-  <%= h(game.team2.name) %>
-  <%= h(game.date) %>
-  <br>
-  <% end %>
-  <br>
+<% for prediction in @predictions %>
+  <%= prediction.game.team1.name %> <br>
 <% end %>

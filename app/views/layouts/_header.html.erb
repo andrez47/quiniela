@@ -1,18 +1,25 @@
 <div id="header" class="round">
   <% if logged_in? %>
   <%= link_to logo, home_path %>
+  <%= flag(current_user.team.code, current_user.team.name) %>
+  <%= gravatar_for current_user %>
   <% else %>
   <%= link_to logo, root_path %>
   <% end %>
   <ul class="navigation round">
     <% if logged_in? %>
+    <%= h current_user.name %>
     <li><%= link_to "Home", home_path %></li>
+    <li><%= link_to "Calendar", calendar_path %></li>
     <% if is_admin? %>
     <li><%= link_to "Users", users_path %></li>
     <% end %>
     <li><%= link_to 'Settings', edit_user_path(current_user) %></li>
     <li><%= link_to 'Logout', logout_path %></li>
-    <% else %>
     <% end %>
+    <li><%= link_to 'EN', locales_path('en') %></li>
+    <li><%= link_to 'ES', locales_path('es') %></li>
   </ul>
 </div>
+
+

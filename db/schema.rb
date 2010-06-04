@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20100601050502) do
     t.string   "phase"
     t.integer  "number"
     t.string   "winner"
-    t.date     "date"
+    t.datetime "date"
     t.datetime "update_date"
   end
 

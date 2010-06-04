@@ -6,7 +6,7 @@
 #  id             :integer(4)      not null, primary key
 #  name           :string(255)
 #  code           :string(255)
-#  group_name     :string(255)
+#  group          :string(255)
 #  group_position :integer(4)
 #
 

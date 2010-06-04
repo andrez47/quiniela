@@ -1,0 +1,15 @@
+
+<h3>Group <%= games[0].phase %></h3>
+<table class="games round">
+  <% for game in games %>
+  <tr>
+    <td width="10"><%= game.number %></td>
+    <td width="100"><%= game.date.strftime("%d/%m %H:%M") %></td>
+    <td width="10"><%= flag(game.team1.code, game.team1.name) %></td>
+    <td width="100"><%= h(game.team1.name) %></td>
+    <td width="10">vs</td>
+    <td width="100"><%= h(game.team2.name) %></td>
+    <td width="10"><%= flag(game.team2.code, game.team2.name) %></td>
+  </tr>
+  <% end %>
+</table>
