@@ -70,32 +70,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_predictions_by_phase(phase)
+    predictions = Prediction.find(:all,
+      :conditions => ["user_id = ? and g.phase = ?", self.id, phase],
+      :joins => "inner join games as g on game_id = g.id")
+  end
+
   def get_predictions
     predictions = [
-      Prediction.find(:all,
-        :conditions => ["user_id = ? and g.phase = 'A'", self.id],
-        :joins => "inner join games as g on game_id = g.id"),
-      Prediction.find(:all,
-        :conditions => ["user_id = ? and g.phase = 'B'", self.id],
-        :joins => "inner join games as g on game_id = g.id"),
-      Prediction.find(:all,
-        :conditions => ["user_id = ? and g.phase = 'C'", self.id],
-        :joins => "inner join games as g on game_id = g.id"),
-      Prediction.find(:all,
-        :conditions => ["user_id = ? and g.phase = 'D'", self.id],
-        :joins => "inner join games as g on game_id = g.id"),
-      Prediction.find(:all,
-        :conditions => ["user_id = ? and g.phase = 'E'", self.id],
-        :joins => "inner join games as g on game_id = g.id"),
-      Prediction.find(:all,
-        :conditions => ["user_id = ? and g.phase = 'F'", self.id],
-        :joins => "inner join games as g on game_id = g.id"),
-      Prediction.find(:all,
-        :conditions => ["user_id = ? and g.phase = 'G'", self.id],
-        :joins => "inner join games as g on game_id = g.id"),
-      Prediction.find(:all,
-        :conditions => ["user_id = ? and g.phase = 'H'", self.id],
-        :joins => "inner join games as g on game_id = g.id")
+      get_predictions_by_phase('A'),
+      get_predictions_by_phase('B'),
+      get_predictions_by_phase('C'),
+      get_predictions_by_phase('D'),
+      get_predictions_by_phase('E'),
+      get_predictions_by_phase('F'),
+      get_predictions_by_phase('G'),
+      get_predictions_by_phase('H')
     ]
   end
 end

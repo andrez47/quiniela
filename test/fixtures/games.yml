@@ -11,7 +11,7 @@
 #  phase       :string(255)
 #  number      :integer(4)
 #  winner      :string(255)
-#  date        :date
+#  date        :datetime
 #  update_date :datetime
 #
 

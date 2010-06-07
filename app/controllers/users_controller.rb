@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   def home
-    @predictions = Prediction.find(:all, :conditions => ["user_id = ?", current_user.id])
+    @predictions = current_user.get_predictions_by_phase('A')
   end
 
   def destroy
