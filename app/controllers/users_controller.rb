@@ -71,18 +71,28 @@ class UsersController < ApplicationController
   end
 
   def home
-    #@predictions = current_user.get_predictions_by_phase('A')
+    @phase = 'A'
   end
 
   def predictions
+    @phase = params[:phase] || 'A'
     current_user.predictions.each { |p| p.attributes = params[:prediction][p.id.to_s] }
 
     if current_user.predictions.all?(&:valid?)
       current_user.predictions.each(&:save!)
-      redirect_to home_path
     else
       flash.now[:error] = "There were errors!"
-      render :action => 'home'
+    end
+
+    render :action => 'home'
+  end
+
+  def phases
+    @phase = params[:phase] || 'A'
+
+    render :update do |page|
+      page.replace_html 'scores', :partial => 'scores', :object => @phase
+      page.replace_html 'standings', :partial => 'standings', :object => @phase
     end
   end
 end

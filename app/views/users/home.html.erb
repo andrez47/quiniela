@@ -1,37 +1,17 @@
 <h1><%= t "home.title" %></h1>
 
-<% form_for current_user, :url => predictions_path do -%>
+<%= link_to_remote 'Group A', :url => phases_path('A') %>
+<%= link_to_remote 'Group B', :url => phases_path('B') %>
+<%= link_to_remote 'Group C', :url => phases_path('C') %>
+<%= link_to_remote 'Group D', :url => phases_path('D') %>
+<%= link_to_remote 'Group E', :url => phases_path('E') %>
+<%= link_to_remote 'Group F', :url => phases_path('F') %>
+<%= link_to_remote 'Group G', :url => phases_path('G') %>
+<%= link_to_remote 'Group H', :url => phases_path('H') %>
 
-<table class="box round">
-  <% for @prediction in current_user.predictions %>
-    <%= error_messages_for :prediction %>
-    <% fields_for "prediction[]" do |f| %>
-    <%= f.hidden_field :id %>
-  <tr>
-    <td width="10"><%= @prediction.game.number %></td>
-    <td width="100"><%= @prediction.game.date.strftime("%d/%m %H:%M") %></td>
-    <% if @prediction.game.team1 %>
-    <td width="10"><%= flag(@prediction.game.team1.code, @prediction.game.team1.name) %></td>
-    <td width="100"><%= h(@prediction.game.team1.name) %></td>
-    <% else %>
-    <td width="10"></td>
-    <td width="100">TBD</td>
-    <% end %>
-    <td width="10"><%= f.text_field :score1, :size => 2 %></td>
-    <td width="10">vs</td>
-    <td width="10"><%= f.text_field :score2, :size => 2 %></td>
-    <% if @prediction.game.team1 %>
-    <td width="100"><%= h(@prediction.game.team2.name) %></td>
-    <td width="10"><%= flag(@prediction.game.team2.code, @prediction.game.team2.name) %></td>
-    <% else %>
-    <td width="100">TBD</td>
-    <td width="10"></td>
-    <% end %>
-    <td width="100"><%= h(@prediction.points) %></td>
-  </tr>
-    <% end %>
-  <% end %>
-</table>
-
-<%= submit_tag 'Save' %>
-<% end -%>
+<div id="scores">
+  <%= render :partial => 'scores', :object => @phase %>
+</div>
+<div id="standings">
+  <%= render :partial => 'standings', :object => @phase %>
+</div>
