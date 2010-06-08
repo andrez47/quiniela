@@ -6,9 +6,6 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-User.create(:name => "Administrator", :email => "admin@quiniela.com", :password => "11qwcsa10", :password_confirmation => "11qwcsa10", :country => "CR", :user_type => 1, :team_id => 1)
-User.create(:name => "Andres Hernandez", :email => "andrez47@gmail.com", :password => "123123", :password_confirmation => "123123",    :country => "CR", :user_type => 0, :team_id => 25)
-
 teams = Team.create([
   { :name => 'South Africa',   :code => 'STA', :group => 'A', :group_position => 1},
   { :name => 'Mexico',         :code => 'MEX', :group => 'A', :group_position => 2},
@@ -92,5 +89,23 @@ games = Game.create([
   { :team1_id => 32, :team2_id => 30, :phase => 'H', :number => 3, :date => '2010-06-21 16:00:00', :update_date => '2010-06-11 16:00:00'},
   { :team1_id => 29, :team2_id => 31, :phase => 'H', :number => 4, :date => '2010-06-21 20:30:00', :update_date => '2010-06-11 16:00:00'},
   { :team1_id => 32, :team2_id => 29, :phase => 'H', :number => 5, :date => '2010-06-25 20:30:00', :update_date => '2010-06-11 16:00:00'},
-  { :team1_id => 30, :team2_id => 31, :phase => 'H', :number => 6, :date => '2010-06-25 20:30:00', :update_date => '2010-06-11 16:00:00'}
+  { :team1_id => 30, :team2_id => 31, :phase => 'H', :number => 6, :date => '2010-06-25 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '8', :number => 1, :date => '2010-06-26 16:00:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '8', :number => 2, :date => '2010-06-26 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '8', :number => 3, :date => '2010-06-27 16:00:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '8', :number => 4, :date => '2010-06-27 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '8', :number => 5, :date => '2010-06-28 16:00:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '8', :number => 6, :date => '2010-06-28 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '8', :number => 7, :date => '2010-06-29 16:00:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '8', :number => 8, :date => '2010-06-29 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '4', :number => 1, :date => '2010-07-02 16:00:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '4', :number => 2, :date => '2010-07-02 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '4', :number => 3, :date => '2010-07-03 16:00:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '4', :number => 4, :date => '2010-07-03 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '2', :number => 1, :date => '2010-07-06 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '2', :number => 2, :date => '2010-07-07 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '3', :number => 1, :date => '2010-07-10 20:30:00', :update_date => '2010-06-11 16:00:00'},
+  { :phase => '1', :number => 1, :date => '2010-07-11 20:30:00', :update_date => '2010-06-11 16:00:00'}
 ])
+
+User.create(:name => "Administrator", :email => "admin@quiniela.com", :password => "11qwcsa10", :password_confirmation => "11qwcsa10", :country => "CR", :user_type => 1, :team_id => 1)

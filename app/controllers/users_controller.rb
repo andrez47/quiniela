@@ -64,14 +64,25 @@ class UsersController < ApplicationController
     @predictions = @user.get_predictions
   end
 
-  def home
-    @predictions = current_user.get_predictions_by_phase('A')
-  end
-
   def destroy
     user = User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_path
   end
 
+  def home
+    #@predictions = current_user.get_predictions_by_phase('A')
+  end
+
+  def predictions
+    current_user.predictions.each { |p| p.attributes = params[:prediction][p.id.to_s] }
+
+    if current_user.predictions.all?(&:valid?)
+      current_user.predictions.each(&:save!)
+      redirect_to home_path
+    else
+      flash.now[:error] = "There were errors!"
+      render :action => 'home'
+    end
+  end
 end

@@ -21,7 +21,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   belongs_to :team
-  has_many :predictions
+  has_many :predictions, :dependent => :destroy
 
   include Authentication
   include Authentication::ByPassword

@@ -15,4 +15,9 @@
 class Prediction < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
+
+  validates_numericality_of :score1, :message => "Invalid number"
+  validates_numericality_of :score2, :message => "Invalid number"
+  validates_inclusion_of    :score1, :in => 0..99, :message => "Invalid number"
+  validates_inclusion_of    :score2, :in => 0..99, :message => "Invalid number"
 end
