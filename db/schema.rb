@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(:version => 20100601050502) do
   create_table "predictions", :force => true do |t|
     t.integer "user_id"
     t.integer "game_id"
-    t.integer "score1"
-    t.integer "score2"
-    t.string  "winner"
+    t.integer "score1",  :default => 0
+    t.integer "score2",  :default => 0
+    t.string  "winner",  :default => "0"
     t.integer "points"
   end
 
