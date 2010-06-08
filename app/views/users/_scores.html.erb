@@ -20,7 +20,7 @@ Group <%= @phase %>
     <td width="10"><%= f.text_field :score1, :size => 2 %></td>
     <td width="10">vs</td>
     <td width="10"><%= f.text_field :score2, :size => 2 %></td>
-    <% if @prediction.game.team1 %>
+    <% if @prediction.game.team2 %>
     <td width="100"><%= h(@prediction.game.team2.name) %></td>
     <td width="10"><%= flag(@prediction.game.team2.code, @prediction.game.team2.name) %></td>
     <% else %>
