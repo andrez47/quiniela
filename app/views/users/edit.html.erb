@@ -6,18 +6,14 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirmation" %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
 <% end %>
+
+<div class="actions">
+  <%= link_to 'Change your Password', :action => "change_password", :id => @user.id %>
+</div>
 
 <div>
   <%= gravatar_for @user %>

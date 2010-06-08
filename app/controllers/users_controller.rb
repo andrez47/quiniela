@@ -74,4 +74,39 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def forgot
+    @user = User.new    
+  end
+
+  def forgot_password
+    return unless request.post?
+    @user = User.find_by_email(params[:user][:email])
+    if @user      
+      newPassword = rand(10 ** 6).to_s.rjust(6,'0')
+      result = @user.update_attributes(:password => newPassword, :password_confirmation => newPassword)
+      
+      if !result
+        flash[:notice] = "Unable reset your password"
+      else
+        UserMailer.deliver_forgot_password(@user, newPassword)
+        flash[:notice] = "A password reset link has been sent to your email address"
+      end
+      
+      redirect_to root_path
+    else
+      flash[:notice] = "Could not find a user with that email address" 
+      redirect_to forgot_path
+    end
+  end
+
+  def change_password
+    paramId = params[:id]
+    if !is_admin? && paramId.to_i != self.current_user.id.to_i
+      redirect_to home_path
+    else
+      @user = User.find(params[:id])
+    end
+  end
+
+
 end
