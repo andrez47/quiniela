@@ -1,0 +1,7 @@
+<h1>Forgot your password?</h1>
+
+<% form_for :user, :url => { :action => 'forgot_password'} do |form| %>
+    What is the email address used to create your account?<br />
+    <%= form.text_field :email, :size => 50 %><br />
+    <%= submit_tag "Request Password" %>
+<% end %>
