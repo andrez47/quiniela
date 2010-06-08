@@ -1,1 +1,11 @@
 <br>Standings <%= @phase %><br>
+
+<table class="box round">
+  <% for @prediction in current_user.predictions %>
+    <% if @prediction.game.phase == @phase %>
+  <tr>
+    <td width="10"><%= @prediction.game.number %></td>
+  <tr>
+    <% end %>
+  <% end %>
+</table>

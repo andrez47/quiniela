@@ -55,12 +55,11 @@ ActionController::Routing::Routes.draw do |map|
   # user pages
   map.home            '/home',        :controller => 'users', :action => 'home'
   map.register        '/register',    :controller => 'users', :action => 'new'
-  map.list            '/list',        :controller => 'users', :action => 'index'
   map.forgot          '/forgot',          :controller => 'users', :action => 'forgot'
   map.forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
   map.change_password '/change_password', :controller => 'users', :action => 'change_password'
   map.predictions     '/predictions', :controller => 'users', :action => 'predictions'
-  map.phases          '/:phase',      :controller => 'users', :action => 'phases'
+  map.phases          'phases/:phase',      :controller => 'users', :action => 'phases'
   map.resources       :users
 
   #map.connect ':controller/:action/:id'

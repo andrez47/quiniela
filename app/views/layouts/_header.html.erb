@@ -12,7 +12,7 @@
     <li><%= link_to "Home", home_path %></li>
     <li><%= link_to "Calendar", calendar_path %></li>
     <% if is_admin? %>
-    <li><%= link_to "Users", list_path %></li>
+    <li><%= link_to "Users", users_path %></li>
     <% end %>
     <li><%= link_to 'Settings', edit_user_path(current_user) %></li>
     <li><%= link_to 'Logout', logout_path %></li>

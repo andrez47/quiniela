@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
     if @user.update_attributes(params[:user])
       if is_admin?
-        redirect_to list_path
+        redirect_to users_path
         flash[:notice] = 'User was successfully updated.'
       else
         redirect_to home_path
